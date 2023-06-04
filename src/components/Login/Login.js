@@ -7,7 +7,17 @@ export const Login = () => {
     e.preventDefault()
     const password = e.target.password.value;
     const email = e.target.email.value;
-    console.log(password,email)
+    fetch("http://localhost:5000/login", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({email,password})
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      console.log(data)
+    })
   }
   return (
     <div className="container  ">
