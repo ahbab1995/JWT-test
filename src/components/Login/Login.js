@@ -1,9 +1,11 @@
 import React from "react";
 import { Button, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
-
+  const navigate = useNavigate()
   const handleLogin = e => {
+  
     e.preventDefault()
     const password = e.target.password.value;
     const email = e.target.email.value;
@@ -16,6 +18,10 @@ export const Login = () => {
     })
     .then(res=>res.json())
     .then(data=>{
+      if (data.success) {
+        localStorage.setItem('accessToken',data.accessToken)
+        navigate('/orderlist')
+      }
       console.log(data)
     })
   }
